@@ -511,9 +511,9 @@ goodLists.sort(function(obj1,obj2){
         });
 ```
 
-8.reverse()：
+8. reverse()：
 
-​	将数组中的元素颠倒顺序，返回逆序后的数组
+		将数组中的元素颠倒顺序，返回逆序后的数组
 
 9.join(separator)
 
@@ -542,8 +542,6 @@ goodLists.sort(function(obj1,obj2){
 3．获取某个字符在字符串中的索引   str.indexOf(“字符”)   若没有该字符，则返回值是 -1；
 
 #### 三、字符串的其他方法
-
-
 
 ###### 1．replace(str|regExp,’’) 
 
@@ -585,6 +583,8 @@ i:  不区分大小写
        }            
    } 
    console.log(arr.sort(compare));
+   
+   新建一个函数，传入两个对象的某个要排序的参数，小于大于等于分别返回 -1  1  0   再用数组的sort() 方法，
    ```
 
    
@@ -794,7 +794,7 @@ clearInterval(intervalID)：清除指定id标识的定时器操作
 ​	*search 设置或返回从问号 (?) 开始的 URL（查询部分）,   用location.search 接收到的对象是下面这样的格式，需要用的时候需要进行字符串的裁剪  	str.split("=")
 
 ```
-?g_name=test1Name&g_price=89.99&
+?g_name=test1Name&g_price=89.99&   location.search.split("?")[1].split("=")[1];
 ```
 
 ​      
@@ -907,7 +907,7 @@ document.documentElement
 
 （1）创建
 
-​	指定的元素节点：**Documnet.createElement(****“标签名”);**    
+​	指定的元素节点：**Documet.createElement(****“标签名”);**    
 
 ​	比如：Documnet.createElement(“h3”)
 
@@ -2339,6 +2339,42 @@ $_POST	获取前端用get方式传递过来的数据
 isset() 判断某个值是否被设置，若不存在返回boolean
 ```
 
+```
+//post请求的案例
+jQuery(function ($) {
+    var $uname = $("#uname");
+    var $pwd = $("#pwd");
+    var xhr = new XMLHttpRequest();
+    $("#loginBtn").on("click",function(){
+
+        var user = {
+            "uname" : $uname.val(),
+            "pwd" : $pwd.val()
+        };
+        xhr.onreadystatechange = ()=>{
+            var status = [200,304];
+            if(xhr.readyState == 4 && status.indexOf(xhr.status)!=-1) {
+                console.log(xhr.responseText);
+            }
+        };
+
+        console.log(JSON.stringify(user));
+        xhr.open("post","../api/login.php");
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); //必须加上
+        //Content-Type设置成application/x-www-form-urlencoded 的情况下，
+        // 请求主体可以用key1=value1&key2=value2的形式发送数据
+        xhr.send("user=" + JSON.stringify(user));
+    });
+
+
+
+});
+
+
+```
+
+
+
 #### 文件的读取与写入
 
 ##### fopen(path,mode)：打开文件
@@ -3003,7 +3039,7 @@ MySQLi extension (“i” 意为 improved) 安装：Linux 和 Windows: 在 php5 
 1. 执行sql语句查询结果集
 
    ```
-   //编写sql语句
+       //编写sql语句
        $sql = 'select * from student';
    
        //获取查询结果集
@@ -4622,6 +4658,8 @@ JQuery是一个兼容多浏览器的javascript类库，核心理念是write less
 
 2. 常用操作
 
+   【获取自定义属性用attr（）】
+
    1. jQuery对象与原生对象的转换
 
       1. jQuery转原生js
@@ -4652,7 +4690,7 @@ JQuery是一个兼容多浏览器的javascript类库，核心理念是write less
 
    1. 基本筛选：
       1. ​    ：odd/:even ,   :gt(n) / :lt(n)  索引支持负数  
-      2.    contains ("内容")  筛选出包含“内容”  这三个字的元素
+      2.   contains ("内容")  筛选出包含“内容”  这三个字的元素
    2. 筛选的方法：
       1. first()/last()   获取集合中的第一个、最后一个元素
       2. eq(idx  || -idx)   获取第idx个元素，可以是负数
@@ -4672,12 +4710,12 @@ JQuery是一个兼容多浏览器的javascript类库，核心理念是write less
       2. parents([expr])  取得所有的父级元素
       3. closest([expr | obj | ele ]) : 从元素本身开始，逐级向上元素匹配，并返回最先匹配的元素
       4. offsetParent（）  返回第一个有定位属性(absolute,relative,fixed)* 的父元素,如果没有定位父级，则返回html元素 
-   3.  查找兄弟元素 
-      1. next([expr]): 返回下一个同辈元素 ==> nextElementSibling
-      2. prev([expr]): 获取前一个同辈元素 ==> previousElementSibling
-      3. nextAll([expr]): 获取当前元素之后所有的同辈元素
-      4. prevAll([expr]) 获取当前元素之前所有的同辈元素
-      5. siblings([expr]) 获取当前元素的所有兄弟元素（除自身以外的所有兄弟元素 = * prevAll + nextAll）
+   3. 查找兄弟元素 
+      4. next([expr]): 返回下一个同辈元素 ==> nextElementSibling
+      5. prev([expr]): 获取前一个同辈元素 ==> previousElementSibling
+      6. nextAll([expr]): 获取当前元素之后所有的同辈元素
+      7. prevAll([expr]) 获取当前元素之前所有的同辈元素
+      8. siblings([expr]) 获取当前元素的所有兄弟元素（除自身以外的所有兄弟元素 = * prevAll + nextAll）
 
 
 
@@ -5042,7 +5080,7 @@ each(function(idx,ele){}) //用于遍历jquery对象
 	​		
 
 		编写jquery插件
-	
+		
 			插件形式分为3类：
 
 - 封装对象方法插件，扩展原型对象方法
@@ -5267,7 +5305,7 @@ gulp.task('任务名', function() {
    1. gulp.watch(glob [, opts], tasks) 
    2. gulp.watch(glob [, opts, cb]) 
 
-   ​	
+   	​	
 
 
 
@@ -5753,6 +5791,104 @@ $padding:5px 10px 15px 20px;
 
    4. 
 
+
+
+# ======================================
+
+
+
+开发阶段书写js:
+
+​	1.js文件应该分成多个，功能不能相互影响。
+
+​	2.方便维护
+
+分开阶段书写js：
+
+​	1.请求次数过多
+
+​	2.依赖问题
+
+​	3.上线之前要压缩js文件
+
+​	4.js加载过程是同步的，引入的js越多网页加载的时间越长
+
+
+
+script  标签的async  属性把js加载变成异步
+
+
+
+# 六、第六部分模块化开发
+
+### RequireJs：
+
+好处：
+
+​	实现js文件的异步加载，比卖你网页失去响应
+
+​	管理模块之间的依赖性，        
+
+
+
+预加载：等待模块加载完毕之后再加载后面的代码
+
+延迟加载：回调函数就是典型的延迟加载	1                                                                                                                                                                             
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # 附：报错信息总结：
 
 1.很有可能你的符号错了，中英文符号，或者多了少了括号。
@@ -5802,12 +5938,6 @@ Unexpected end of input  的英文意思是“**意外的终止输入**”
 
 
 ![1539929162324](C:\Users\覃珍珍\AppData\Local\Temp\1539929162324.png)
-
-
-
-
-
-
 
 
 
